@@ -1,0 +1,125 @@
+---
+description: Apply these rules when creating the project
+globs:
+alwaysApply: true
+---
+## Project Overview
+
+*   **Type:** cursor_project_rules
+*   **Description:** AgencyBox is an AI-driven advertising campaign management platform tailored for building and scaling Meta (Facebook/Instagram) ad campaigns. It empowers users—from solo entrepreneurs to enterprise teams—to quickly create high-performing campaigns by leveraging AI-generated ad copy and creative assets combined with industry best practices.
+*   **Primary Goal:** Simplify the ad creation process by guiding users through a step-by-step wizard that integrates Meta’s Marketing API and advanced AI services (GPT-4 for ad copy & Sora for creative assets), while ensuring robust security, scalability, and compliance.
+
+## Project Structure
+
+### Framework-Specific Routing
+
+*   **Directory Rules:**
+
+    *   **Next.js 14 (App Router):** Uses the `app/` directory with nested route folders. For example, route pages are defined as `app/[route]/page.tsx` following Next.js 14 conventions.
+    *   Example 1: "Next.js 14 (App Router)" → `app/[route]/page.tsx` conventions
+    *   Example 2: "Next.js (Pages Router)" → `pages/[route].tsx` pattern (not used in this project)
+    *   Example 3: "React Router 6" → `src/routes/` with `createBrowserRouter` (if ever applicable)
+
+### Core Directories
+
+*   **Versioned Structure:**
+
+    *   **app/api:** Next.js 14 API routes utilizing Route Handlers for serverless functions (e.g. webhooks, Meta OAuth callbacks).
+    *   **components/ui:** Shadcn UI-based components that follow design patterns defined in the CodeGuide Starter Pro kit.
+
+### Key Files
+
+*   **Stack-Versioned Patterns:**
+
+    *   **app/layout.tsx:** Next.js 14 root layout file defining shared layouts and global styling.
+    *   **app/page.tsx:** Entry point for the main landing page following Next.js App Router conventions.
+
+## Tech Stack Rules
+
+*   **Version Enforcement:**
+
+    *   **next@14:** Enforce use of the App Router with no usage of outdated methods such as `getInitialProps`.
+    *   **tailwindcss@latest:** Utilize Tailwind CSS for utility-first styling and maintain a custom theme (blue-purple gradient for AgencyBox branding).
+    *   **typescript@latest:** Guarantee type-safety across the entire codebase.
+    *   **supabase@latest:** Leverage Supabase for database, storage, and serverless (Edge Functions) with strict row-level security.
+    *   **clerk@latest:** Utilize Clerk Dev for authentication, SSO integration, and secure user management.
+    *   **openai@latest:** Use OpenAI API (GPT-4 and Sora) for AI-driven content generation and creative asset production.
+    *   **meta-marketing-api:** Follow Meta’s API integration guidelines for campaign management and insights retrieval.
+    *   **vercel:** Deploy the Next.js frontend and API routes on Vercel’s serverless edge network.
+    *   **stripe:** Integrate Stripe (in future phases) for subscription and billing management following best practices.
+
+## PRD Compliance
+
+*   **Non-Negotiable:**
+
+    *   "AgencyBox simplifies ad campaign creation while integrating advanced AI features with robust security and scalability" - All solutions must comply with Meta’s API standards, enforce GDPR/CCPA compliant data handling, and enable role-based access control per the PRD.
+
+## App Flow Integration
+
+*   **Stack-Aligned Flow:**
+
+    *   Example: "Next.js 14 Auth Flow" → `app/auth/login/page.tsx` that utilizes server actions for secure authentication via Clerk and integrates Meta OAuth for connecting ad accounts.
+
+## Best Practices
+
+*   **Next.js**
+
+    *   Ensure the project uses the App Router structure (`app/` directory) with nested route folders for clarity.
+    *   Use server actions for secure API calls and integration with third-party services.
+    *   Optimize for fast build times and minimal cold starts on Vercel.
+
+*   **Tailwind CSS**
+
+    *   Configure a custom theme in Tailwind config to enforce consistent branding (blue-purple gradient, modern sans-serif fonts like Inter).
+    *   Use utility classes to maintain design consistency across components.
+    *   Leverage responsive design practices for a seamless mobile and desktop experience.
+
+*   **Typescript**
+
+    *   Strictly type all components and functions for improved maintainability and scalability.
+    *   Utilize TS interfaces and types for API response consistency, especially when interacting with third-party services.
+    *   Regularly update TypeScript definitions to align with new library versions.
+
+*   **Supabase**
+
+    *   Enforce Row-Level Security (RLS) on all tables to maintain data isolation between workspaces.
+    *   Use Supabase Edge Functions for backend logic such as webhook processing and scheduled jobs.
+    *   Securely store API keys and sensitive data using Supabase Vault and environment configurations.
+
+*   **Clerk Auth**
+
+    *   Integrate Clerk Dev for secure authentication flows, including email/password and SSO.
+    *   Utilize Clerk’s UI components to reduce custom code and adhere to security best practices.
+    *   Ensure that role-based access controls are enforced both at the UI and API levels.
+
+*   **Open AI**
+
+    *   Use GPT-4 for generating ad copy and ensuring that outputs adhere to advertising best practices.
+    *   Leverage Sora (or similar) for image/video asset generation, with prompt moderation and quality checks.
+    *   Monitor API usage closely to manage quotas per user tier and prevent abuse.
+
+*   **Meta Marketing API**
+
+    *   Implement secure OAuth flows to connect Meta ad accounts reliably.
+    *   Adhere strictly to Meta’s API rate limits and error handling practices.
+    *   Ensure all campaign creation and performance insights follow Meta’s dynamic creative guidelines.
+
+*   **Vercel**
+
+    *   Utilize Vercel’s edge functions and serverless capabilities to deploy globally distributed applications.
+    *   Keep environment variables secure and ensure seamless continuous integration/deployment.
+    *   Monitor function execution times to prevent cold start issues.
+
+*   **Stripe**
+
+    *   Plan for future integration by establishing secure webhook endpoints for subscription updates.
+    *   Use Stripe Checkout to ensure PCI compliance and minimize handling of sensitive payment data.
+    *   Synchronize subscription tiers with application feature flags.
+
+## Rules
+
+*   Derive folder/file patterns **directly** from techStackDoc versions provided in the CodeGuide Starter Pro kit.
+*   If Next.js 14 App Router is used: Enforce an `app/` directory with nested route folders (e.g. `app/api`, `app/auth`, etc.).
+*   If Pages Router were selected: Use a `pages/*.tsx` flat structure (not applicable here).
+*   Mirror this logic for other frameworks like React Router, SvelteKit, etc., if adopted.
+*   Never mix version patterns (for example, do not include `pages/` in an App Router project).
